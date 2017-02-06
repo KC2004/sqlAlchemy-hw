@@ -80,14 +80,19 @@ def get_model_info(year):
     """Takes in a year and prints out each model name, brand name, and brand
     headquarters for that year using only ONE database query."""
 
-    pass
+    car_list = db.session.query(Model.name, Brand.brand_id, Brand.name, Brand.headquarters).filter(Model.year==year).\
+    join(Brand).all()
+
+    for car in car_list:
+        print "%s \t %s \t %s \t %s \n" % (car[0], car[1], car[2], car[3])
 
 
 def get_brands_summary():
     """Prints out each brand name and each model name with year for that brand
     using only ONE database query."""
 
-    pass
+    car_list = db.session.query(Model.name, Brand.brand_id, Brand.name, Brand.headquarters).filter(Model.year==year).\
+    join(Brand).all()
 
 
 def search_brands_by_name(mystr):
